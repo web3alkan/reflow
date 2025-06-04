@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReFlow - Otomatik Penetrant Sıvı Geri Kazanım Sistemi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #1e40af;
+            --accent-color: #3730a3;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f1f5f9;
+            --white: #ffffff;
+            --success: #047857;
+            --warning: #b45309;
+            --error: #dc2626;
+            --gradient: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #fafafa;
+        }
+
+        /* Header & Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.99);
+            box-shadow: var(--card-shadow);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-right: 0.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('reflow.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            font-family: 'Georgia', serif;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            background: var(--bg-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Statistics */
+        .stats {
+            background: var(--bg-light);
+            border-top: 3px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Technology Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .tech-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+        }
+
+        .tech-item h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .tech-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .team-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .team-avatar {
+            width: 140px;
+            height: 140px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+
+        .team-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+        }
+
+        .team-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .team-institution {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .team-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .team-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Reports Section */
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .report-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .report-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .report-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .report-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+        }
+
+        .report-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .download-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 0 1rem;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            display: block;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #475569;
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: white;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 3rem;
+                transition: left 0.3s ease;
+                box-shadow: var(--card-shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .features-grid,
+            .stats-grid,
+            .team-grid,
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--primary-color);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="ReFlow Logo">
+                ReFlow
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkında</a></li>
+                <li><a href="#features">Özellikler</a></li>
+                <li><a href="#results">Sonuçlar</a></li>
+                <li><a href="#team">Takım</a></li>
+                <li><a href="#reports">Raporlar</a></li>
+            </ul>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>ReFlow</h1>
+            <p>Havacılık Endüstrisinde Çevresel Sürdürülebilirlik ve Ekonomik Verimlilik İçin Akıllı NDT Atık Yönetim Sistemi</p>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Projeyi Keşfet
+                </a>
+                <a href="#reports" class="btn btn-secondary">
+                    <i class="fas fa-download"></i>
+                    Raporları İndir
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Proje Hakkında</h2>
+                <p>ReFlow, TÜBİTAK 2209-A desteği ile geliştirilen yenilikçi penetrant sıvı geri kazanım sistemidir. Havacılık endüstrisindeki kimyasal atıkları azaltarak çevresel sürdürülebilirlik sağlar.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Otomatik Geri Kazanım</h3>
+                    <p>Penetrant sıvıların %38 oranında otomatik geri kazanımı ile ekonomik tasarruf sağlar.</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Çevre Dostu</h3>
+                    <p>Yıllık 178.6 ton CO₂ emisyon azaltımı ile çevresel sürdürülebilirliğe katkı sağlar.</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Ekonomik Verimlilik</h3>
+                    <p>Tesis başına yıllık 67.500 TL tasarruf ve 2.8 yıl geri ödeme süresi ile karlı yatırım.</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>IoT Teknolojisi</h3>
+                    <p>Gerçek zamanlı izleme ve kontrol için IoT tabanlı akıllı sensör sistemi.</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Kalite Garantisi</h3>
+                    <p>ASTM E1417 standartlarına uygun %94.2 kalite kontrolü başarı oranı.</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>İstihdam Etkisi</h3>
+                    <p>420 kişilik istihdam yaratma potansiyeli ile sosyal fayda sağlar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="results" class="section stats">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Performans Sonuçları</h2>
+                <p>6 aylık pilot test sonuçları ve sektörel etki potansiyeli</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number">42%</div>
+                    <div class="stat-label">Atık Azaltımı</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number">67.500₺</div>
+                    <div class="stat-label">Yıllık Tasarruf</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number">96.7%</div>
+                    <div class="stat-label">Sistem Uptime</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-number">2.8</div>
+                    <div class="stat-label">Yıl Geri Ödeme</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="stat-number">178.6</div>
+                    <div class="stat-label">Ton CO₂ Azaltımı</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="stat-number">420</div>
+                    <div class="stat-label">Kişi İstihdam</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Teknoloji Yığını</h2>
+                <p>Modern teknolojiler ve IoT çözümleri ile güçlendirilmiş sistem</p>
+            </div>
+            
+            <div class="tech-stack">
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fab fa-node-js"></i>
+                    <h4>Node.js</h4>
+                    <p>Backend API</p>
+                </div>
+                
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="200">
+                    <i class="fab fa-react"></i>
+                    <h4>React.js</h4>
+                    <p>Frontend UI</p>
+                </div>
+                
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="300">
+                    <i class="fas fa-database"></i>
+                    <h4>MongoDB</h4>
+                    <p>Database</p>
+                </div>
+                
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="400">
+                    <i class="fab fa-python"></i>
+                    <h4>Python AI</h4>
+                    <p>Yapay Zeka</p>
+                </div>
+                
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="500">
+                    <i class="fas fa-wifi"></i>
+                    <h4>IoT Sensörler</h4>
+                    <p>MQTT Protocol</p>
+                </div>
+                
+                <div class="tech-item" data-aos="flip-left" data-aos-delay="600">
+                    <i class="fas fa-filter"></i>
+                    <h4>Ultrasonik Filtrasyon</h4>
+                    <p>0.01-1.0 μm</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section stats">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Proje Takımı</h2>
+                <p>Uzman akademisyen ve araştırmacılardan oluşan deneyimli ekip</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="team-name">Ayşenur YOLCU</div>
+                    <div class="team-role">Proje Yürütücüsü (Öğrenci)</div>
+                    <div class="team-institution">Ankara Yıldırım Beyazıt Üniversitesi<br>Teknik Bilimler Meslek Yüksekokulu<br>Motorlu Araçlar Ve Ulaştırma Teknolojileri Bölümü</div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-name">Öğr. Gör. Dilaver KARAŞAHİN</div>
+                    <div class="team-role">Proje Danışmanı</div>
+                    <div class="team-institution">Ankara Yıldırım Beyazıt Üniversitesi<br>Teknik Bilimler Meslek Yüksekokulu<br>Motorlu Araçlar Ve Ulaştırma Teknolojileri Bölümü</div>
+                    <a href="https://avesis.aybu.edu.tr/dkarasahin" target="_blank" class="team-link">
+                        <i class="fas fa-external-link-alt"></i> AVESIS Profili
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports" class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Proje Raporları</h2>
+                <p>Detaylı akademik raporlar, ekonomik analiz ve teknik dokümantasyon</p>
+            </div>
+            
+            <div class="reports-grid">
+                <div class="report-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="report-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="report-title">Akademik Rapor</div>
+                    <div class="report-description">Bilimsel araştırma metodolojisi ve akademik bulguların detaylı analizi, TÜBİTAK 2209-A projesi kapsamında hazırlanmış kapsamlı akademik değerlendirme.</div>
+                    <a href="docs/academic-report.pdf" class="download-btn" target="_blank">
+                        <i class="fas fa-download"></i>
+                        İndir (PDF)
+                    </a>
+                </div>
+                
+                <div class="report-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="report-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="report-title">Ekonomik Etki Analizi</div>
+                    <div class="report-description">Makroekonomik etki değerlendirmesi ve sektörel analiz raporu, proje sonuçlarının ekonomik boyutları.</div>
+                    <a href="docs/economic-impact-summary.md" class="download-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Görüntüle
+                    </a>
+                </div>
+                
+                <div class="report-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="report-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="report-title">Teknik Dokümantasyon</div>
+                    <div class="report-description">Sistem mimarisi, kurulum rehberi ve API dokümantasyonu, teknik uygulama detayları.</div>
+                    <a href="docs/technical-report.pdf" class="download-btn" target="_blank">
+                        <i class="fas fa-download"></i>
+                        İndir (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReFlow Projesi</h3>
+                    <p>TÜBİTAK 2209-A Üniversite Öğrencileri Araştırma Projeleri desteği ile geliştirilen yenilikçi NDT atık yönetim sistemi.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <a href="mailto:aysenur.yolcu@aybu.edu.tr">aysenur.yolcu@aybu.edu.tr</a>
+                    <a href="mailto:dilaver.karasahin@aybu.edu.tr">dilaver.karasahin@aybu.edu.tr</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kurum</h3>
+                    <p>Ankara Yıldırım Beyazıt Üniversitesi</p>
+                    <p>Teknik Bilimler Meslek Yüksekokulu</p>
+                    <p>Motorlu Araçlar Ve Ulaştırma Teknolojileri Bölümü</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Destek</h3>
+                    <p>TÜBİTAK 2209-A</p>
+                    <p>Üniversite Öğrencileri Araştırma Projeleri</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ReFlow Projesi. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1200,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile Navigation
+        const burger = document.querySelector('.burger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const progressBar = document.querySelector('.progress-bar');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Progress bar
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for statistics
+        const counters = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = counter.textContent;
+                    const number = parseFloat(target.replace(/[^0-9.]/g, ''));
+                    
+                    if (!isNaN(number)) {
+                        animateCounter(counter, number, target);
+                    }
+                    
+                    counterObserver.unobserve(counter);
+                }
+            });
+        });
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        function animateCounter(element, target, originalText) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = originalText;
+                    clearInterval(timer);
+                } else {
+                    const suffix = originalText.replace(/[0-9.]/g, '');
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 25);
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (hero && heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html> 

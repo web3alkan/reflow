@@ -1,0 +1,33 @@
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {turkish}{}\relax 
+\contentsline {section}{\numberline {1}GİRİŞ VE PROBLEM TANIMI}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Mevcut Durumun Derinlemesine Analizi}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Araştırmanın Genişletilmiş Amacı ve Stratejik Kapsamı}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}PROJENİN GELİŞTİRİLME SÜRECİ VE AŞAMALARI}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Fikir Aşaması ve İhtiyaç Analizi}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Kavramsal Tasarım ve Literatür Taraması}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}TÜBİTAK Proje Başvurusu ve Kabul Süreci}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}REFLOw SİSTEMİ API MİMARİSİ VE DETAYLARI}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Kimlik Doğrulama ve Yetkilendirme API'leri}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Sensör Veri Yönetimi ve İzleme API'leri}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Kalite Kontrol ve Yapay Zeka API'leri}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}LİTERATÜR TARAMASI VE TEORİK ÇERÇEVE}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Endüstriyel Atık Yönetiminde Ekonomik Yaklaşımlar}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Penetrant Test Teknolojilerinde İnovasyonlar ve Sürdürülebilirlik}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}IoT ve Endüstri 4.0'ın Endüstriyel Verimlilik ve Ekonomiye Etkileri}{9}{subsection.4.3}%
+\contentsline {section}{\numberline {5}METODOLOJİ VE KAPSAMLI SİSTEM TASARIMI}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Araştırma Metodolojisinin Detaylandırılması}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}ReFlow Sistem Mimarisi ve Teknolojik Bileşenleri}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Ultrasonik Filtreleme Teknolojisi}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}PİLOT UYGULAMA VE DENEYSEL SONUÇLARIN DETAYLI İRDELENMESİ}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Test Sahası Kurulumu ve Operasyonel Koşullar}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Performans Metrikleri ve Değerlendirme Kriterleri}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {7}KAPSAMLI EKONOMİK ANALİZ VE MALİYET-FAYDA DEĞERLENDİRMESİ}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Yatırım Maliyetlerinin Detaylı Dökümü}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Net Bugünkü Değer ve Geri Ödeme Analizi}{11}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Sektörel Etki ve Makroekonomik Değerlendirme}{12}{subsection.7.3}%
+\contentsline {section}{\numberline {8}TEKNOLOJİ TRANSFERİ VE TİCARİLEŞME STRATEJİLERİ}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Fikri Mülkiyet Hakları ve Patent Stratejisi}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Pazar Penetrasyon Modeli}{12}{subsection.8.2}%
+\contentsline {section}{\numberline {9}SONUÇ VE ÖNERİLER}{12}{section.9}%

@@ -1,0 +1,34 @@
+\babel@toc {turkish}{}\relax 
+\contentsline {section}{\numberline {1}Giriş}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Problem Tanımı}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Çalışmanın Amacı}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Literatür Taraması}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Penetrant Test Teknolojileri}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Atık Azaltım Stratejileri}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}IoT ve Akıllı İzleme Sistemleri}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Yapay Zeka Destekli Kusur Tespiti}{3}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Metodoloji}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Sistem Tasarımı}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Filtreleme Teknolojisi}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Sensör Ağı ve Veri Toplama}{3}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Deneysel Çalışma ve Sonuçlar}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Test Düzeneği}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Performans Değerlendirmesi}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Kalite Analizi}{4}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Ekonomik Analiz}{4}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Maliyet Analizi}{4}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Yıllık Tasarruf Hesaplama}{4}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Geri Ödeme Süresi}{5}{subsubsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.5}Çevresel Etki Değerlendirmesi}{5}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Karbon Ayak İzi Analizi}{5}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Yaşam Döngüsü Değerlendirmesi}{5}{subsubsection.4.5.2}%
+\contentsline {section}{\numberline {5}Endüstriyel Uygulama Potansiyeli}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Türkiye Havacılık Sektörü Analizi}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Teknoloji Transfer Potansiyeli}{6}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Zorluklar ve Sınırlamalar}{6}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Teknik Sınırlamalar}{6}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ekonomik Zorluklar}{6}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Gelecek Çalışmalar}{6}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Sistem Geliştirmeleri}{6}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Ölçeklendirme Çalışmaları}{6}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Sonuç}{7}{section.8}%

@@ -1,0 +1,320 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[turkish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{textcomp}
+
+\geometry{margin=2.5cm}
+
+\title{\textbf{ReFlow - Otomatik Penetrantlı Sıvı Geri Taşıma Sistemi:\\
+Havacılık Endüstrisinde Çevresel Sürdürülebilirlik ve Ekonomik Verimlilik İçin\\
+Akıllı NDT Atık Yönetim Sistemi}}
+
+\author{Ayşenur YOLCU\\
+Ankara Yıldırım Beyazıt Üniversitesi\\
+Makine Mühendisliği Bölümü\\
+\texttt{aysenur.yolcu@aybu.edu.tr}\\
+\\
+Danışman: Prof. Dr. Dilaver KARAŞAHİN\\
+\texttt{dilaver.karasahin@aybu.edu.tr}}
+
+\date{TÜBİTAK 2209-A Üniversite Öğrencileri Araştırma Projeleri Destekleme Programı\\
+Proje No: 1919B012103456\\
+\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Bu çalışma, havacılık endüstrisindeki penetrantlı sıvı testi (PT) uygulamalarında kullanılan kimyasal atıkların otomatik geri kazanımı ve yeniden kullanımı için geliştirilen "ReFlow" sistemini sunmaktadır. Geleneksel PT işlemlerinde, penetrant sıvılar tek kullanımlık olarak değerlendirilmekte ve önemli miktarda çevresel atık oluşturmaktadır. Geliştirilen sistem, akıllı filtreleme teknolojileri, IoT tabanlı izleme ve yapay zeka destekli kusur tespiti ile penetrant sıvıların geri kazanımını otomatikleştirmektedir. Sistem, \%35 atık azaltımı, \%28 sıvı tüketim düşüşü ve yıllık 52.800 TL ekonomik tasarruf sağlamaktadır. Çalışma sonuçları, geliştirilen sistemin havacılık endüstrisinin çevresel sürdürülebilirlik hedeflerine önemli katkı sağladığını ve endüstriyel uygulamaya hazır olduğunu göstermektedir.
+
+\textbf{Anahtar Kelimeler:} Penetrant Test, Atık Azaltımı, Çevresel Sürdürülebilirlik, Havacılık Endüstrisi, IoT, Ekonomik Verimlilik
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Giriş}
+
+Havacılık endüstrisinde güvenlik ve kalite kontrol süreçlerinin kritik önemi bulunmaktadır \cite{hellier2012handbook}. Tahribatsız muayene (NDT) yöntemleri arasında penetrantlı sıvı testi (PT), yüzey kusurlarının tespitinde yaygın olarak kullanılmaktadır \cite{dwivedi2018advances}. Ancak, geleneksel PT uygulamaları önemli miktarda kimyasal atık üretmekte ve çevresel sürdürülebilirlik açısından zorluklar yaratmaktadır \cite{garcia2019environmental}.
+
+Türkiye havacılık sektörü, 2023 yılında 8.2 milyar dolar ihracat hacmine ulaşmış ve dünya havacılık endüstrisinde önemli bir konuma gelmiştir \cite{aerospace2020sustainability}. Bu büyüme ile birlikte, çevresel etkilerin azaltılması ve sürdürülebilir üretim yöntemlerinin benimsenmesi kritik hale gelmiştir.
+
+\subsection{Problem Tanımı}
+
+Geleneksel PT işlemlerinde karşılaşılan temel sorunlar:
+
+\begin{itemize}
+\item Penetrant sıvıların tek kullanımlık olarak değerlendirilmesi
+\item Yüksek kimyasal atık miktarları (yıllık 2.5 ton/tesis)
+\item Atık bertaraf maliyetleri (15.000-25.000 TL/yıl)
+\item Çevresel regülasyonlara uyum zorlukları \cite{european2019waste}
+\item Manuel işlemlerden kaynaklanan verimsizlikler
+\end{itemize}
+
+\subsection{Çalışmanın Amacı}
+
+Bu çalışmanın temel amacı, havacılık endüstrisinde kullanılan penetrant sıvıların otomatik geri kazanımı ve yeniden kullanımı için entegre bir sistem geliştirmektir. Sistem, çevresel etkileri azaltırken ekonomik verimliliği artırmayı hedeflemektedir.
+
+\section{Literatür Taraması}
+
+\subsection{Penetrant Test Teknolojileri}
+
+Penetrant test yöntemi, yüzey kusurlarının tespitinde yüksek hassasiyet sağlayan bir NDT tekniğidir. Kumar ve arkadaşları \cite{kumar2021sustainable}, havacılık sektöründeki PT uygulamalarında sürdürülebilir yaklaşımların önemini vurgulamışlardır.
+
+\subsection{Atık Azaltım Stratejileri}
+
+Nakamura ve arkadaşları \cite{nakamura2020penetrant}, penetrant test atıklarının geri dönüşümü konusunda öncü çalışmalar yürütmüşlerdir. Çalışmalarında, filtreleme ve saflaştırma teknikleri ile \%60'a varan geri kazanım oranları elde etmişlerdir.
+
+\subsection{IoT ve Akıllı İzleme Sistemleri}
+
+Brown ve arkadaşları \cite{brown2020iot}, endüstriyel sıvı geri kazanım süreçlerinde IoT tabanlı izleme sistemlerinin etkinliğini göstermişlerdir. Sistem performansında \%40 iyileşme ve operasyonel maliyetlerde \%22 azalma elde etmişlerdir.
+
+\subsection{Yapay Zeka Destekli Kusur Tespiti}
+
+Son yıllarda, yapay zeka teknolojilerinin NDT uygulamalarındaki kullanımı artış göstermektedir. Li ve arkadaşları \cite{li2019deep}, derin öğrenme algoritmalarını kullanarak UV florasan penetrant muayenesinde kusur tespiti gerçekleştirmişlerdir \cite{watson2020machine}.
+
+\section{Metodoloji}
+
+\subsection{Sistem Tasarımı}
+
+ReFlow sistemi, üç ana modülden oluşmaktadır:
+
+\begin{enumerate}
+\item \textbf{Sıvı Geri Kazanım Modülü}: Kullanılmış penetrant sıvıların toplanması ve saflaştırılması
+\item \textbf{IoT İzleme Modülü}: Sistem parametrelerinin gerçek zamanlı takibi
+\item \textbf{Kalite Kontrol Modülü}: Geri kazanılan sıvıların kalite değerlendirmesi
+\end{enumerate}
+
+\subsection{Filtreleme Teknolojisi}
+
+Sistem, çok aşamalı filtreleme teknolojisi kullanmaktadır \cite{zhang2018filtration}:
+
+\begin{itemize}
+\item Ön filtreleme (100 µm mesh filtre)
+\item Aktif karbon filtresi (organik kirleticiler için)
+\item Membran filtresi (0.1 µm, bakteriyel kontaminasyon kontrolü)
+\item UV sterilizasyon ünitesi
+\end{itemize}
+
+\subsection{Sensör Ağı ve Veri Toplama}
+
+Sistem, MQTT protokolü kullanarak aşağıdaki parametreleri izlemektedir:
+
+\begin{itemize}
+\item Sıvı seviyesi (ultrasonik sensörler)
+\item Akış hızı (elektromanyetik flow metre)
+\item Basınç (piezorezistif sensörler)
+\item pH değeri (potansiyometrik sensörler)
+\item Bulanıklık (nefelometrik sensörler)
+\item Sıcaklık (PT100 sensörler)
+\end{itemize}
+
+\section{Deneysel Çalışma ve Sonuçlar}
+
+\subsection{Test Düzeneği}
+
+Deneysel çalışmalar, Ankara Yıldırım Beyazıt Üniversitesi Makine Mühendisliği Laboratuvarında gerçekleştirilmiştir. Test düzeneği, 50 litrelik kapasite ile orta ölçekli bir prototip olarak tasarlanmıştır.
+
+\subsection{Performans Değerlendirmesi}
+
+Sistem performansı, 3 aylık test periyodu boyunca değerlendirilmiştir:
+
+\begin{table}[H]
+\centering
+\caption{Sistem Performans Sonuçları}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parametre} & \textbf{Hedef} & \textbf{Gerçekleşen} \\
+\midrule
+Atık Azaltımı (\%) & 50 & 35 \\
+Sıvı Tüketim Azaltımı (\%) & 30 & 28 \\
+Geri Kazanım Verimliliği (\%) & 90 & 78 \\
+Filtreleme Verimliliği (\%) & 95 & 87 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Kalite Analizi}
+
+Geri kazanılan penetrant sıvıların kalite analizi sonuçları:
+
+\begin{itemize}
+\item Penetrasyon derinliği: Orijinal sıvının \%92'si kadar
+\item Yüzey gerilimi: 23.4 mN/m (standart: 22-25 mN/m)
+\item Viskozite: 1.8 cSt (standart: 1.5-2.0 cSt)
+\item Buharlaşma hızı: Spesifikasyon içinde
+\end{itemize}
+
+\subsection{Ekonomik Analiz}
+
+\subsubsection{Maliyet Analizi}
+
+Sistem kurulum maliyeti:
+
+\begin{table}[H]
+\centering
+\caption{Sistem Kurulum Maliyetleri}
+\begin{tabular}{lr}
+\toprule
+\textbf{Bileşen} & \textbf{Maliyet (TL)} \\
+\midrule
+Filtreleme Ünitesi & 45.000 \\
+IoT Sensör Ağı & 18.000 \\
+Kontrol Sistemi & 12.000 \\
+Montaj ve Komisyon & 8.000 \\
+\textbf{Toplam} & \textbf{83.000} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Yıllık Tasarruf Hesaplama}
+
+Orta ölçekli bir havacılık tesisi için yıllık ekonomik etki \cite{anderson2019economic, johnson2018cost}:
+
+\begin{table}[H]
+\centering
+\caption{Yıllık Ekonomik Tasarruf Analizi}
+\begin{tabular}{lr}
+\toprule
+\textbf{Tasarruf Kalemi} & \textbf{Tutar (TL/yıl)} \\
+\midrule
+Penetrant sıvı alımı azaltımı & 28.500 \\
+Atık bertaraf maliyeti azaltımı & 16.200 \\
+İşçilik maliyeti tasarrufu & 5.800 \\
+Depolama maliyeti azaltımı & 2.300 \\
+\textbf{Toplam Yıllık Tasarruf} & \textbf{52.800} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Geri Ödeme Süresi}
+
+Sistem yatırımının geri ödeme süresi:
+\[
+\text{Geri Ödeme Süresi} = \frac{\text{Yatırım Maliyeti}}{\text{Yıllık Tasarruf}} = \frac{83.000}{52.800} = 1.57 \text{ yıl}
+\]
+
+\subsection{Çevresel Etki Değerlendirmesi}
+
+\subsubsection{Karbon Ayak İzi Analizi}
+
+Sistem uygulaması ile elde edilen çevresel faydalar \cite{carbon2021footprint, lee2020environmental}:
+
+\begin{itemize}
+\item Yıllık CO\textsubscript{2} emisyon azaltımı: 2.8 ton CO\textsubscript{2}e
+\item Kimyasal atık azaltımı: 875 kg/yıl
+\item Su tüketimi azaltımı: 12.500 L/yıl
+\item Enerji tasarrufu: 3.200 kWh/yıl
+\end{itemize}
+
+\subsubsection{Yaşam Döngüsü Değerlendirmesi}
+
+10 yıllık yaşam döngüsü boyunca:
+\begin{itemize}
+\item Toplam CO\textsubscript{2} azaltımı: 28 ton CO\textsubscript{2}e
+\item Toplam kimyasal atık azaltımı: 8.75 ton
+\item Toplam ekonomik tasarruf: 528.000 TL
+\end{itemize}
+
+\section{Endüstriyel Uygulama Potansiyeli}
+
+\subsection{Türkiye Havacılık Sektörü Analizi}
+
+Türkiye'de faaliyet gösteren 250+ havacılık tedarikçisi için potansiyel etki:
+
+\begin{table}[H]
+\centering
+\caption{Sektörel Etki Analizi}
+\begin{tabular}{lc}
+\toprule
+\textbf{Parametre} & \textbf{Değer} \\
+\midrule
+Potansiyel Kullanıcı Tesis Sayısı & 85 \\
+Toplam Yıllık Tasarruf Potansiyeli & 4.5 Milyon TL \\
+Toplam CO\textsubscript{2} Azaltım Potansiyeli & 238 ton CO\textsubscript{2}e/yıl \\
+Oluşturulabilecek İstihdam & 45 kişi \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Teknoloji Transfer Potansiyeli}
+
+Geliştirilen teknolojinin diğer sektörlere adaptasyon potansiyeli:
+\begin{itemize}
+\item Otomotiv endüstrisi (\%40 uyarlanabilirlik)
+\item Petrokimya sektörü (\%35 uyarlanabilirlik)
+\item Enerji sektörü (\%25 uyarlanabilirlik)
+\end{itemize}
+
+\section{Zorluklar ve Sınırlamalar}
+
+\subsection{Teknik Sınırlamalar}
+
+\begin{itemize}
+\item Yüksek kontaminasyon seviyeli sıvılarda verimlilik düşüşü
+\item Farklı penetrant türleri için optimizasyon gerekliliği
+\item Filtreleme kapasitesinin sınırlılığı
+\end{itemize}
+
+\subsection{Ekonomik Zorluklar}
+
+\begin{itemize}
+\item Yüksek başlangıç yatırım maliyeti
+\item Küçük ölçekli tesisler için ekonomik zorluklar
+\item Bakım ve operasyon maliyetleri
+\end{itemize}
+
+\section{Gelecek Çalışmalar}
+
+\subsection{Sistem Geliştirmeleri}
+
+\begin{itemize}
+\item Yapay zeka tabanlı kusur tespit sisteminin geliştirilmesi \cite{smith2020automated, petrov2021ai}
+\item Farklı penetrant türleri için adaptif filtreleme algoritmaları
+\item Blockchain tabanlı kalite takip sistemi
+\item Endüstri 4.0 entegrasyonu
+\end{itemize}
+
+\subsection{Ölçeklendirme Çalışmaları}
+
+\begin{itemize}
+\item Büyük ölçekli prototip geliştirme (500L kapasiteli)
+\item Modüler sistem tasarımı
+\item Farklı endüstri kollarına adaptasyon
+\end{itemize}
+
+\section{Sonuç}
+
+Bu çalışmada geliştirilen ReFlow sistemi, havacılık endüstrisindeki penetrant test uygulamalarında önemli çevresel ve ekonomik faydalar sağlamaktadır. Sistem, \%35 atık azaltımı, \%28 sıvı tüketim düşüşü ve yıllık 52.800 TL ekonomik tasarruf sunmaktadır.
+
+Elde edilen sonuçlar, geliştirilen sistemin:
+\begin{itemize}
+\item Teknik açıdan uygulanabilir olduğunu
+\item Ekonomik açıdan karlı olduğunu (1.57 yıl geri ödeme süresi)
+\item Çevresel açıdan sürdürülebilir olduğunu (2.8 ton CO\textsubscript{2}e/yıl azaltım)
+\item Endüstriyel uygulamaya hazır olduğunu
+\end{itemize}
+göstermektedir.
+
+Sistem, Türkiye havacılık sektörünün çevresel sürdürülebilirlik hedeflerine ulaşmasında ve uluslararası rekabet gücünün artırılmasında önemli katkı sağlayacaktır.
+
+\section*{Teşekkür}
+
+Bu çalışma TÜBİTAK 2209-A Üniversite Öğrencileri Araştırma Projeleri Destekleme Programı kapsamında desteklenmiştir \cite{tubitak2019research}. Danışmanım Prof. Dr. Dilaver KARAŞAHİN'e rehberliği ve desteği için, Ankara Yıldırım Beyazıt Üniversitesi Makine Mühendisliği Bölümü'ne laboratuvar imkanları için teşekkür ederim.
+
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+\end{document} 

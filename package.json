@@ -1,0 +1,59 @@
+{
+  "name": "reflow-system",
+  "version": "1.0.0",
+  "description": "ReFlow - Otomatik Penetrantlı Sıvı Geri Taşıma Sistemi",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "start": "npm run backend:start",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:start": "cd backend && npm start",
+    "backend:install": "cd backend && npm install",
+    "frontend:dev": "cd frontend && npm start",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:install": "cd frontend && npm install",
+    "install-all": "npm run backend:install && npm run frontend:install",
+    "build": "npm run frontend:build",
+    "test": "npm run backend:test && npm run frontend:test",
+    "backend:test": "cd backend && npm test",
+    "frontend:test": "cd frontend && npm test",
+    "docker:build": "docker build -t reflow-system .",
+    "docker:run": "docker run -p 5000:5000 -p 3000:3000 reflow-system",
+    "setup": "npm run install-all && npm run setup:env",
+    "setup:env": "node scripts/setup.js",
+    "seed": "cd backend && npm run seed",
+    "deploy": "npm run build && npm run deploy:production",
+    "deploy:production": "echo 'Production deployment script'",
+    "lint": "npm run backend:lint && npm run frontend:lint",
+    "backend:lint": "cd backend && npm run lint",
+    "frontend:lint": "cd frontend && npm run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/reflow-system.git"
+  },
+  "keywords": [
+    "reflow",
+    "penetrant",
+    "liquid",
+    "recovery",
+    "system",
+    "aviation",
+    "NDT",
+    "environmental",
+    "sustainability"
+  ],
+  "author": "Ayşenur YOLCU <aysenur@example.com>",
+  "license": "MIT",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+} 

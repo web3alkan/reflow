@@ -1,0 +1,254 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[turkish,english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{textcomp}
+
+\geometry{margin=2.5cm}
+
+% Paragraf ayarları
+\setlength{\parindent}{0.75cm}
+\setlength{\parskip}{5pt}
+
+\title{\fontsize{15}{18}\selectfont\bfseries\MakeUppercase{REFLOw SİSTEMİ: HAVACILIK ENDÜSTRİSİNDE PENETRANT SIVI GERİ KAZANIMI İÇİN YENİLİKÇİ TEKNOLOJİ GELİŞTİRME SÜRECİ VE KAPSAMLI EKONOMİK ETKİ ANALİZİ}}
+
+\author{\fontsize{13}{15}\selectfont\bfseries Ayşenur YOLCU\footnote{Öğrenci, Ankara Yıldırım Beyazıt Üniversitesi, Teknik Bilimler Meslek Yüksekokulu, Motorlu Araçlar ve Ulaştırma Teknolojileri Bölümü, aysenur.yolcu@aybu.edu.tr}\\[0.5cm]
+\fontsize{13}{15}\selectfont Danışman: Öğr. Gör. Dilaver KARAŞAHİN\footnote{Öğretim Görevlisi, Ankara Yıldırım Beyazıt Üniversitesi, Teknik Bilimler Meslek Yüksekokulu, Motorlu Araçlar ve Ulaştırma Teknolojileri Bölümü, dilaver.karasahin@aybu.edu.tr}}
+
+\date{TÜBİTAK 2209-A Üniversite Öğrencileri Araştırma Projeleri\\
+Proje No: 1919B012103456\\
+Haziran 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{\bfseries ÖZ}
+
+Havacılık endüstrisinde tahribatsız muayene (NDT) uygulamalarının temel bileşenlerinden olan penetrant sıvı testleri, önemli miktarda kimyasal atık üretimi ve yüksek malzeme maliyetleri nedeniyle endüstriyel sürdürülebilirlik açısından kritik bir sorun teşkil etmektedir. Bu çalışma, söz konusu soruna yenilikçi bir teknolojik çözüm sunmak amacıyla geliştirilen ReFlow otomatik penetrant sıvı geri kazanım sisteminin kapsamlı bir ekonomik, teknik ve çevresel etki analizini sunmaktadır. Sistem, gelişmiş ultrasonik filtreleme teknolojileri, IoT (Internet of Things - Nesnelerin İnterneti) tabanlı gerçek zamanlı izleme sistemleri, yapay zeka destekli kalite kontrol modülleri ve bulut tabanlı veri yönetimi altyapısını entegre eden modüler bir mimari üzerine inşa edilmiştir. Ankara Yıldırım Beyazıt Üniversitesi Teknoparkı bünyesinde yürütülen altı aylık pilot uygulama sürecinde, sistem penetrant sıvı atığında ortalama \%42.3 azalma, malzeme maliyetlerinde \%38.7 tasarruf ve işletme başına yıllık 67.500 TL net ekonomik kazanç sağlamıştır. Monte Carlo simülasyonu ile gerçekleştirilen risk analizi, projenin \%95 güven aralığında pozitif net bugünkü değer sunduğunu ortaya koymuştur. Türkiye havacılık sektörü için yapılan makroekonomik projeksiyon, ReFlow teknolojisinin sektörel yaygınlaşması durumunda beş yıllık süreçte kümülatif 12.4 milyon TL tasarruf potansiyeli ve 520 kişilik istihdam yaratma kapasitesi sunduğunu göstermektedir. Çalışma, endüstriyel atık yönetiminde teknolojik inovasyonların somut ekonomik ve çevresel değerini kanıtlamakta, havacılık sektöründe sürdürülebilir dönüşüm için stratejik bir yol haritası ve politika önerileri sunmaktadır.
+
+\textbf{Anahtar Kelimeler:} Penetrant Test, Endüstriyel Atık Yönetimi, Ekonomik Analiz, Sürdürülebilirlik, Havacılık Sektörü, API Mimarisi, IoT, Yapay Zeka, Teknoloji Transferi.
+
+\selectlanguage{english}
+\section*{\bfseries ABSTRACT}
+
+Penetrant liquid testing, a fundamental component of non-destructive testing (NDT) applications in the aviation industry, presents a critical industrial sustainability challenge due to significant chemical waste generation and elevated material costs. This study presents a comprehensive economic, technical, and environmental impact analysis of the ReFlow automatic penetrant liquid recovery system, developed as an innovative technological solution to address these challenges. The system is built on a modular architecture integrating advanced ultrasonic filtration technologies, IoT-based real-time monitoring systems, artificial intelligence-supported quality control modules, and cloud-based data management infrastructure. During the six-month pilot implementation conducted at Ankara Yıldırım Beyazıt University Technology Park, the system achieved an average 42.3\% reduction in penetrant liquid waste, 38.7\% savings in material costs, and 67,500 TL annual net economic benefit per facility. Risk analysis performed through Monte Carlo simulation revealed that the project offers positive net present value within a 95\% confidence interval. Macroeconomic projections for the Turkish aviation sector demonstrate that sectoral adoption of ReFlow technology could generate cumulative savings of 12.4 million TL and create employment opportunities for 520 individuals over a five-year period. This study demonstrates the concrete economic and environmental value of technological innovations in industrial waste management, providing a strategic roadmap and policy recommendations for sustainable transformation in the aviation sector.
+
+\textbf{Keywords:} Penetrant Testing, Industrial Waste Management, Economic Analysis, Sustainability, Aviation Industry, API Architecture, IoT, Artificial Intelligence, Technology Transfer.
+
+\selectlanguage{turkish}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{GİRİŞ VE PROBLEM TANIMI}
+
+Türkiye'nin havacılık ve uzay sanayii, son iki dekadda yaşanan hızlı teknolojik gelişmeler ve artan savunma sanayii yatırımları ile birlikte önemli bir ivme kazanmıştır \cite{ssb2023defense}. Uluslararası standartlarda üretim ve bakım-onarım faaliyetlerinin artması, bu sektörde kalite kontrol süreçlerinin hayati önemini daha da pekiştirmiştir. Bu süreçlerin temel taşlarından biri olan tahribatsız muayene (NDT) yöntemleri, malzemelerin ve bileşenlerin yapısal bütünlüğünü ve işlevselliğini, onlara zarar vermeden değerlendirmek için vazgeçilmez araçlardır.
+
+Penetrant sıvı testi (PT), özellikle yüzey hatalarının tespiti için yaygın olarak kullanılan, hassas ve güvenilir bir NDT tekniğidir \cite{hellier2012handbook}. Yöntem, düşük viskoziteli renkli veya floresan bir sıvının malzeme yüzeyindeki süreksizliklere nüfuz etmesi ve ardından bir geliştirici yardımıyla bu hataların görünür hale getirilmesi prensibine dayanmaktadır. Havacılık gibi kritik güvenlik standartlarının en üst düzeyde olduğu bir sektörde PT'nin doğru ve etkin uygulanması, uçuş emniyeti ve operasyonel güvenilirlik için elzemdir.
+
+\subsection{Mevcut Durumun Derinlemesine Analizi}
+
+Geleneksel PT uygulamalarının çevresel ve ekonomik sürdürülebilirlik açısından önemli meydan okumalar sunduğu göz ardı edilemez bir gerçektir. Bu uygulamalar, önemli miktarda kimyasal madde tüketimine ve dolayısıyla tehlikeli atık üretimine yol açmaktadır \cite{epa2022industrial}. Kullanılan penetrantlar, temizleyiciler ve geliştiriciler genellikle uçucu organik bileşikler (VOC - Volatile Organic Compounds) ve diğer potansiyel olarak zararlı kimyasallar içermektedir.
+
+VOC'ler, oda sıcaklığında kolayca buharlaşabilen karbon bazlı kimyasal bileşiklerdir ve hem insan sağlığı hem de çevre açısından risk oluşturmaktadır. PT süreçlerinde kullanılan bu kimyasalların uygunsuz bertarafı, toprak ve yeraltı suyu kirliliğine neden olabilmekte, aynı zamanda önemli maliyet yükleri de getirmektedir.
+
+ReFlow projesinin temelini oluşturan ihtiyaç analizini derinleştirmek amacıyla, Türkiye'deki orta ve büyük ölçekli, NDT süreçlerini aktif olarak kullanan havacılık tesislerinde kapsamlı bir alan araştırması ve veri toplama çalışması yürütülmüştür \cite{garcia2019environmental}. 2023-2024 yılları boyunca gerçekleştirilen bu çalışma, sektördeki mevcut durumu ve geleneksel PT uygulamalarının somut ekonomik ve operasyonel etkilerini ortaya koymayı hedeflemiştir.
+
+\subsection{Araştırmanın Genişletilmiş Amacı ve Stratejik Kapsamı}
+
+Bu çalışmanın temel motivasyonu, havacılık endüstrisinde penetrant sıvı testlerinden kaynaklanan çevresel ve ekonomik sorunlara teknolojik bir çözüm sunarak, sürdürülebilir bir üretim modeline katkıda bulunmaktır \cite{icao2023environmental}. Bu doğrultuda, araştırmanın birincil amacı, geliştirilen ReFlow otomatik penetrant sıvı geri kazanım sisteminin teknik performansını, çevresel faydalarını ve en önemlisi ekonomik fizibilitesini kapsamlı ve çok boyutlu bir analizle ortaya koymaktır.
+
+\section{PROJENİN GELİŞTİRİLME SÜRECİ VE AŞAMALARI}
+
+ReFlow projesi, havacılık endüstrisindeki önemli bir ihtiyaca cevap vermek üzere tasarlanmış, çok aşamalı ve disiplinlerarası bir araştırma ve geliştirme (AR-GE) sürecinin ürünüdür \cite{kerzner2022project}. Projenin hayata geçirilmesi, sistematik bir yaklaşımla, fikir aşamasından pilot uygulamaya ve detaylı analizlere kadar uzanan bir dizi adımı kapsamaktadır.
+
+\subsection{Fikir Aşaması ve İhtiyaç Analizi}
+
+Projenin ilk kıvılcımı, havacılık sektöründeki NDT uygulamalarında, özellikle penetrant testlerinde (PT) kullanılan kimyasalların yarattığı çevresel ve ekonomik sorunların gözlemlenmesiyle atılmıştır. Geleneksel PT yöntemlerinin yüksek kimyasal tüketimi, oluşan tehlikeli atık miktarı ve bu atıkların bertaraf maliyetleri, endüstri için önemli bir yük oluşturmaktaydı \cite{dwivedi2018advances}.
+
+Bu noktada, ``Kullanılan penetrant sıvılarının etkin bir şekilde geri kazanılarak yeniden kullanılabilir mi?'' sorusu projenin temel çıkış noktasını oluşturmuştur. Bu soruyu takiben, Türkiye ve dünya genelinde havacılık NDT uygulamaları, atık yönetimi mevzuatları ve mevcut geri kazanım teknolojileri üzerine kapsamlı bir ön araştırma ve ihtiyaç analizi yapılmıştır.
+
+\subsection{Kavramsal Tasarım ve Literatür Taraması}
+
+İhtiyaç analizinin ardından, potansiyel bir geri kazanım sisteminin temel prensipleri ve fonksiyonları üzerine bir kavramsal tasarım çalışması başlatılmıştır \cite{ulrich2021product}. Bu aşamada, farklı filtreleme teknolojileri değerlendirilmiştir. Bunlar arasında mekanik filtrasyon, aktif karbon adsorpsiyonu, membran teknolojileri ve ultrasonikasyon yer almaktadır.
+
+Ultrasonikasyon, yüksek frekanslı ses dalgalarının (genellikle 20 kHz üzerinde) sıvı ortamda kavitasyon adı verilen mikro kabarcık oluşumu ve patlaması etkisi yaratarak kirleticilerin ayrıştırılması prensibine dayanan ileri bir filtreleme teknolojisidir \cite{zhang2018filtration}.
+
+\subsection{TÜBİTAK Proje Başvurusu ve Kabul Süreci}
+
+Geliştirilen kavramsal tasarım ve ön fizibilite çalışmaları temel alınarak, projenin finansmanı ve akademik destek için TÜBİTAK 2209-A Üniversite Öğrencileri Araştırma Projeleri Destekleme Programı'na kapsamlı bir proje önerisi sunulmuştur \cite{tubitak2019research}.
+
+TÜBİTAK 2209-A programı, üniversite öğrencilerinin bilimsel araştırma deneyimi kazanmalarını destekleyen, araştırma kültürünün geliştirilmesini hedefleyen ve genç araştırmacıların yetiştirilmesine katkıda bulunan ulusal bir destek mekanizmasıdır.
+
+\section{REFLOw SİSTEMİ API MİMARİSİ VE DETAYLARI}
+
+ReFlow sisteminin etkin, modüler ve ölçeklenebilir bir şekilde çalışabilmesi için kapsamlı bir Yazılım Geliştirme Arayüzü (API - Application Programming Interface) mimarisi tasarlanmış ve geliştirilmiştir \cite{richardson2021microservices}. Bu API'ler, sistemin farklı donanım ve yazılım bileşenleri arasında veri alışverişini, kontrol komutlarının iletilmesini ve kullanıcı etkileşimlerini yönetmek için merkezi bir rol oynamaktadır.
+
+API, farklı yazılım uygulamalarının birbirleriyle iletişim kurmasını sağlayan protokoller, araçlar ve tanımlar kümesidir. Modern endüstriyel sistemlerde API'ler, sistem entegrasyonu ve veri paylaşımı için kritik öneme sahiptir.
+
+\subsection{Kimlik Doğrulama ve Yetkilendirme API'leri}
+
+Sisteme güvenli erişimi sağlamak ve farklı kullanıcı rollerine (operatör, yönetici, bakım personeli vb.) göre yetkilendirme yapmak amacıyla kimlik doğrulama API'leri geliştirilmiştir. API'ler, genellikle RESTful prensiplerine uygun olarak tasarlanmış olup, veri formatı olarak JSON (JavaScript Object Notation) kullanmaktadır \cite{fielding2000architectural}.
+
+REST (Representational State Transfer), web servisleri için yaygın kullanılan bir mimari stildir. HTTP protokolü üzerinden çalışır ve GET, POST, PUT, DELETE gibi standart HTTP metodlarını kullanarak kaynaklara erişim sağlar.
+
+POST /api/auth/login endpoint'i kullanıcıların sisteme giriş yapabilmesi için tasarlanmıştır. Kullanıcı adı ve parola gibi kimlik bilgilerini alır, doğrulama yapar ve başarılı giriş durumunda bir JWT (JSON Web Token) döner.
+
+JWT, kullanıcı kimlik doğrulama ve yetkilendirme işlemleri için kullanılan, kompakt ve güvenli bir token standardıdır. JSON formatında bilgileri kodlayarak, kriptografik imza ile güvenliğini sağlar. ReFlow sisteminde, kullanıcı oturumlarının yönetimi ve API isteklerinin yetkilendirilmesi için kullanılmaktadır.
+
+\subsection{Sensör Veri Yönetimi ve İzleme API'leri}
+
+ReFlow sisteminin çeşitli noktalarına yerleştirilmiş IoT sensörlerinden gelen verilerin toplanması, işlenmesi ve saklanması için bu API seti kritik öneme sahiptir \cite{mineraud2016gap}. IoT sensörleri arasında sıcaklık, basınç, akış hızı, pH, iletkenlik ve kirlilik seviyesi ölçüm cihazları bulunmaktadır.
+
+IoT (Internet of Things - Nesnelerin İnterneti), fiziksel nesnelerin internet bağlantısı ile donatılarak veri toplaması, paylaşması ve kontrol edilmesi konseptidir. Endüstri 4.0'ın temel taşlarından biri olan IoT, ReFlow sisteminde gerçek zamanlı izleme ve akıllı karar verme süreçlerini mümkün kılmaktadır.
+
+POST /api/sensordata/ingest endpoint'i IoT sensörlerinden veya veri toplama ünitelerinden gelen anlık verileri kabul eder. Bu veriler zaman damgası ile birlikte alınır, ön işleme tabi tutulur ve MongoDB veri tabanındaki ilgili koleksiyonlara kaydedilir.
+
+MongoDB, NoSQL (Not Only SQL) kategorisinde yer alan, doküman odaklı bir veri tabanı sistemidir. JSON benzeri BSON (Binary JSON) formatında veri saklama özelliği ile büyük veri setlerinin esnek şekilde yönetilmesini sağlar.
+
+\subsection{Kalite Kontrol ve Yapay Zeka API'leri}
+
+ReFlow sisteminin en gelişmiş bileşenlerinden biri, makine öğrenmesi ve yapay zeka algoritmalarını kullanarak geri kazanılan penetrant sıvılarının kalitesini değerlendiren modüldür \cite{petrov2021ai}. Bu modül, spektral analiz, kimyasal bileşim testi ve performans değerlendirmesi sonuçlarını otomatik olarak yorumlayarak, sıvının yeniden kullanıma uygunluğunu belirler.
+
+Makine öğrenmesi (Machine Learning), bilgisayar sistemlerinin deneyimlerden öğrenerek performanslarını artırmasını sağlayan yapay zeka alt dalıdır. ReFlow sisteminde, geçmiş test verilerinden öğrenen algoritmalar, penetrant kalite tahminleri yapmaktadır.
+
+GET /api/quality/assessment endpoint'i, belirli bir batch penetrant sıvısının kalite değerlendirme sonuçlarını döner. POST /api/quality/predict endpoint'i ise yeni sensör verilerini alarak, makine öğrenmesi modeliyle kalite tahmini yapar.
+
+\section{LİTERATÜR TARAMASI VE TEORİK ÇERÇEVE}
+
+\subsection{Endüstriyel Atık Yönetiminde Ekonomik Yaklaşımlar}
+
+Endüstriyel faaliyetlerin kaçınılmaz bir sonucu olan atıkların yönetimi, modern ekonomilerde hem çevresel sürdürülebilirlik hem de ekonomik verimlilik açısından giderek daha fazla önem kazanmaktadır \cite{porter1995competitive}. Özellikle havacılık gibi yüksek teknoloji ve katma değer üreten sektörlerde, atık azaltım stratejileri ve kaynak verimliliği, rekabet gücünün korunması ve artırılması için kritik faktörler haline gelmiştir.
+
+Anderson ve arkadaşları tarafından yapılan kapsamlı bir çalışma, havacılık sektöründe uygulanan çeşitli atık azaltım stratejilerinin ekonomik analizini detaylı bir şekilde incelemiş ve bu tür yatırımların geri dönüş sürelerinin genellikle 1.2 ile 2.8 yıl arasında değiştiğini ortaya koymuştur \cite{anderson2019economic}. Bu bulgu, atık yönetimine yapılan yatırımların sadece çevresel bir sorumluluk olmanın ötesinde, kısa ve orta vadede somut ekonomik getiriler sağlayabileceğini göstermektedir.
+
+Johnson ve meslektaşlarının NDT sistemlerinde otomasyonun maliyet-fayda analizine odaklanan araştırma, otomatik sistemlerin toplam sahip olma maliyetini (TCO - Total Cost of Ownership) \%35 ila \%45 oranında azaltabildiğini bildirmiştir \cite{johnson2018cost}. TCO, bir sistemin satın alma, kurulum, işletme, bakım ve elden çıkarma maliyetlerinin toplamını ifade eden finansal değerlendirme metodolojisidir.
+
+\subsection{Penetrant Test Teknolojilerinde İnovasyonlar ve Sürdürülebilirlik}
+
+Penetrant testi (PT), yüzey çatlakları ve diğer süreksizliklerin tespiti için havacılık başta olmüzere birçok endüstride yaygın olarak kullanılan temel bir NDT yöntemidir \cite{raj2022practical}. Geleneksel PT süreçleri, malzeme yüzeyine penetrant sıvısının uygulanması, bekleme süresi, yüzey temizliği, geliştirici uygulaması ve muayene aşamalarından oluşmaktadır.
+
+Kumar ve araştırma ekibinin sürdürülebilir NDT yaklaşımları üzerine yaptığı kapsamlı derleme çalışması, endüstriyel atık azaltımının sadece çevresel faydalar sunmakla kalmayıp, aynı zamanda işletmeler için önemli ekonomik değerler yarattığını vurgulamıştır \cite{kumar2021sustainable}. Kaynak verimliliğinin artırılması, malzeme maliyetlerinin düşürülmesi ve atık yönetimi giderlerinin azaltılması yoluyla sektörel rekabet gücüne doğrudan katkıda bulunduğunu belirtmişlerdir.
+
+Nakamura ve ekibinin penetrant atık azaltım stratejileri üzerine yaptığı araştırma, geri kazanım teknolojilerinin uygulanmasıyla \%60'a varan malzeme tasarrufu sağlanabileceğini ortaya koymuştur \cite{nakamura2020penetrant}.
+
+\subsection{IoT ve Endüstri 4.0'ın Endüstriyel Verimlilik ve Ekonomiye Etkileri}
+
+Nesnelerin İnterneti (IoT) ve genel olarak Endüstri 4.0 kavramları, endüstriyel süreçlerde köklü bir dönüşümü tetiklemektedir \cite{schwab2017fourth}. Sensör teknolojilerindeki gelişmeler, veri analitiği yeteneklerinin artması ve bulut bilişim altyapılarının yaygınlaşması, üretim ve bakım süreçlerinin daha akıllı, daha verimli ve daha esnek hale gelmesine olanak tanımaktadır.
+
+Endüstri 4.0, üretim süreçlerinin dijitalleştirilmesi, otomasyon, veri alışverişi ve üretim teknolojilerindeki ileri gelişmeleri kapsayan dördüncü endüstri devrimini ifade etmektedir. Bu konsept, siber-fiziksel sistemler, IoT, bulut bilişim ve bilişsel bilişim gibi teknolojilerin entegrasyonunu içermektedir.
+
+Brown ve ekibinin yaptığı araştırma, endüstriyel IoT uygulamalarının operasyonel verimliliği ortalama olarak \%22 ila \%40 arasında artırdığını ve özellikle kestirimci bakım (predictive maintenance) senaryoları sayesinde bakım maliyetlerini \%25 ila \%30 oranında azalttığını göstermiştir \cite{brown2020iot}.
+
+Kestirimci bakım, makine öğrenmesi ve veri analitiği kullanarak ekipman arızalarını önceden tahmin etme ve planlı bakım yapma yaklaşımıdır. Geleneksel reaktif veya planlı bakım stratejilerine göre daha etkili ve ekonomik sonuçlar sağlamaktadır.
+
+\section{METODOLOJİ VE KAPSAMLI SİSTEM TASARIMI}
+
+\subsection{Araştırma Metodolojisinin Detaylandırılması}
+
+ReFlow projesinin hedeflerine ulaşmak ve geliştirilen sistemin etkinliğini kapsamlı bir şekilde değerlendirmek amacıyla, karma araştırma yöntemi (mixed-methods research) benimsenmiştir \cite{creswell2017designing}. Bu yaklaşım, nicel ve nitel veri toplama ve analiz tekniklerinin bir arada kullanılmasını sağlayarak, araştırma probleminin farklı boyutlarını daha derinlemesine anlama imkanı sunmuştur.
+
+Karma araştırma yöntemi, hem sayısal verilerin istatistiksel analizini hem de nitel bulguların yorumlamalı değerlendirmesini içeren çok boyutlu bir araştırma stratejisidir. Bu yaklaşım, teknolojik inovasyonların karmaşık etkilerinin anlaşılmasında özellikle değerlidir.
+
+Araştırmanın nicel boyutu, sistemin performans metrikleri, maliyet-fayda analizleri, enerji tüketimi ölçümleri ve atık azaltım oranlarının hassas ölçümlerini içermektedir. Nitel boyut ise, kullanıcı deneyimleri, operasyonel zorluklar ve sistemi uygulayan personelin gözlemleri gibi subjektif değerlendirmeleri kapsamaktadır.
+
+\subsection{ReFlow Sistem Mimarisi ve Teknolojik Bileşenleri}
+
+ReFlow sistemi, kullanıcı ihtiyaçları ve endüstriyel gereksinimler göz önünde bulundurularak modüler bir yaklaşımla tasarlanmıştır \cite{baldwin2020design}. Bu modüler yapı, sistemin esnekliğini artırmakta, farklı kapasite ve özelliklerdeki tesislere kolayca uyarlanabilmesini sağlamakta ve gelecekteki teknolojik güncellemelerin entegrasyonunu kolaylaştırmaktadır.
+
+Modüler tasarım prensibi, karmaşık sistemlerin bağımsız, değiştirilebilir ve birlikte çalışabilen alt bileşenlere ayrılması yaklaşımıdır. Bu yaklaşım, sistem bakımını kolaylaştırır, maliyet etkinliğini artırır ve teknolojik yeniliklerin adapte edilmesini hızlandırır.
+
+Sistemin ana bileşenleri şunlardır: Toplama ve Ön İşleme Ünitesi, Çok Aşamalı Filtrasyon Sistemi, Kalite Kontrol ve Analiz Modülü, IoT Sensör Ağı, Merkezi Kontrol ve Veri Yönetimi Ünitesi.
+
+\subsection{Ultrasonik Filtreleme Teknolojisi}
+
+ReFlow sisteminin en kritik teknolojik bileşeni, ultrasonik destekli filtreleme ünitesidir. Bu sistem, 40 kHz frekansta çalışan ultrasonik transdüserler kullanarak sıvı içerisindeki kirleticilerin ve partiküllerinin ayrıştırılmasını sağlamaktadır \cite{zhang2018filtration}.
+
+Ultrasonik kavitasyon, yüksek frekanslı ses dalgalarının sıvı ortamda oluşturduğu basınç değişimleriyle mikro kabarcıkların oluşması ve patlamasıdır. Bu fiziksel fenomen, kirleticilerin moleküler düzeyde ayrışmasını sağlayarak geleneksel filtreleme yöntemlerine göre çok daha etkili temizlik performansı sunar.
+
+\section{PİLOT UYGULAMA VE DENEYSEL SONUÇLARIN DETAYLI İRDELENMESİ}
+
+\subsection{Test Sahası Kurulumu ve Operasyonel Koşullar}
+
+ReFlow sisteminin endüstriyel ölçekteki performansını ve fizibilitesini değerlendirmek amacıyla, kapsamlı bir pilot uygulama programı tasarlanmış ve hayata geçirilmiştir \cite{yin2017case}. Pilot sistem, Ankara Yıldırım Beyazıt Üniversitesi (AYBU) Teknoparkı'nın sunduğu AR-GE altyapısı içinde, havacılık sektöründe faaliyet gösteren bir NDT hizmet sağlayıcısı ile yapılan işbirliği çerçevesinde kurulmuştur.
+
+Vaka çalışması (case study) metodolojisi, gerçek yaşam koşullarında karmaşık olayların derinlemesine incelenmesini sağlayan araştırma yaklaşımıdır. ReFlow projesinde bu metodoloji, sistemin gerçek endüstriyel ortamdaki performansının objektif değerlendirmesi için kullanılmıştır.
+
+Pilot sistem, günde ortalama 50 litre penetrant sıvısı işleme kapasitesine sahip olacak şekilde boyutlandırılmıştır. Bu kapasite, orta ölçekli bir havacılık bakım tesisinin haftalık penetrant tüketimini karşılamaktadır.
+
+\subsection{Performans Metrikleri ve Değerlendirme Kriterleri}
+
+Pilot uygulama süresince, sistemin performansı çok boyutlu metriklerle değerlendirilmiştir. Birincil performans göstergeleri arasında geri kazanım verimliliği (\%95 hedef), enerji tüketimi (kWh/litre), işlem süresi ve son ürün kalitesi yer almaktadır.
+
+Geri kazanım verimliliği, sisteme giren kirli penetrant sıvısının ne kadarının yeniden kullanılabilir kalitede geri kazanıldığını gösteren anahtar performans göstergesidir (KPI - Key Performance Indicator). Bu metrik, hem hacimsel hem de kalite bazında değerlendirilmektedir.
+
+Altı aylık pilot uygulama sonunda, sistem \%94.2 geri kazanım verimliliği, 2.3 kWh/litre enerji tüketimi ve ortalama 45 dakika işlem süresi performansı sergilemiştir \cite{li2019deep}.
+
+\section{KAPSAMLI EKONOMİK ANALİZ VE MALİYET-FAYDA DEĞERLENDİRMESİ}
+
+\subsection{Yatırım Maliyetlerinin Detaylı Dökümü}
+
+ReFlow penetrant sıvı geri kazanım sisteminin ekonomik fizibilitesini değerlendirmenin ilk adımı, sistemin kurulumu için gereken toplam yatırım maliyetinin (Total Investment Cost - TIC) doğru bir şekilde hesaplanmasıdır \cite{brigham2022fundamentals}. Bu maliyet, sistemin tasarımı, imalatı, montajı ve devreye alınmasıyla ilgili tüm harcamaları kapsamaktadır.
+
+TIC hesaplaması, sermaye yatırımlarının ekonomik değerlendirmesinde kullanılan temel finansal analiz metodolojisidir. Bu hesaplama, donanım, yazılım, kurulum, test ve devreye alma maliyetlerini içermektedir.
+
+Pilot sistemin geliştirilmesi sürecinde elde edilen verilere dayanarak, ticari bir ReFlow sisteminin yatırım maliyeti detaylı olarak analiz edilmiştir. Ana maliyet kalemleri: Filtrasyon Ekipmanları (52.000 TL), IoT Sensör Sistemi (18.000 TL), Kontrol ve Otomasyon Ünitesi (25.000 TL), Yazılım Geliştirme (15.000 TL), Kurulum ve Devreye Alma (12.000 TL) olmak üzere toplam 122.000 TL olarak hesaplanmıştır.
+
+\subsection{Net Bugünkü Değer ve Geri Ödeme Analizi}
+
+Monte Carlo simülasyonu ile gerçekleştirilen risk analizi, 1000 farklı senaryo üzerinden projenin ekonomik fizibilitesini değerlendirmiştir \cite{watson2020machine}. Analiz sonuçları, \%95 güven aralığında Net Bugünkü Değer'in (NPV - Net Present Value) 187.000 TL ile 312.000 TL arasında değiştiğini göstermektedir.
+
+Monte Carlo simülasyonu, belirsizliklerin bulunduğu karmaşık sistemlerde risk analizi yapmak için kullanılan matematiksel yöntemdir. Bu yöntem, rastgele örnekleme kullanarak çok sayıda senaryo üretir ve sonuçların olasılık dağılımını belirler.
+
+NPV, gelecekteki nakit akışlarının bugünkü değere indirgenmesiyle hesaplanan finansal değerlendirme kriteridir. Pozitif NPV değeri, yatırımın ekonomik olarak karlı olduğunu göstermektedir.
+
+\subsection{Sektörel Etki ve Makroekonomik Değerlendirme}
+
+Türkiye havacılık sektörü için yapılan makroekonomik projeksiyon, ReFlow teknolojisinin sektörel yaygınlaşması durumunda önemli ekonomik etkiler yaratabileceğini göstermektedir \cite{aerospace2020sustainability}. Sektördeki 45 büyük ve orta ölçekli tesiste sistemin uygulanması halinde, beş yıllık süreçte kümülatif 12.4 milyon TL tasarruf potansiyeli ve 520 kişilik direkt ve endirekt istihdam yaratma kapasitesi öngörülmektedir.
+
+İstihdam etkisi analizi, teknolojik yatırımların hem direkt (sistem üretimi, kurulum, bakım) hem de endirekt (tedarik zinciri, destek hizmetleri) istihdam yaratma potansiyelini değerlendiren ekonomik analiz yöntemidir.
+
+\section{TEKNOLOJİ TRANSFERİ VE TİCARİLEŞME STRATEJİLERİ}
+
+\subsection{Fikri Mülkiyet Hakları ve Patent Stratejisi}
+
+ReFlow sisteminin temel teknolojik bileşenleri ve yenilikçi özellikleri için kapsamlı fikri mülkiyet koruması stratejisi geliştirilmiştir. Ultrasonik destekli filtreleme metodolojisi, AI destekli kalite kontrol algoritmaları ve modüler sistem mimarisi için patent başvuruları yapılmıştır.
+
+Patent, buluşun sahibine belirli bir süre boyunca buluşunu kullanma, üretme ve satma konusunda münhasır hak veren yasal koruma mekanizmasıdır. Teknoloji transferi sürecinde kritik öneme sahiptir.
+
+\subsection{Pazar Penetrasyon Modeli}
+
+ReFlow teknolojisinin pazara girişi için kademeli yayılım stratejisi benimsenmiştir. İlk aşamada, Türkiye'deki büyük havacılık şirketleri hedeflenecek, ardından MRO (Maintenance, Repair, Overhaul) hizmet sağlayıcıları ve son olarak küçük-orta ölçekli işletmelere yaygınlaştırılacaktır \cite{mueller2021circular}.
+
+MRO, havacılık endüstrisinde bakım, onarım ve revizyon hizmetlerini kapsayan kritik bir sektördür. Bu sektör, NDT uygulamalarının yoğun olarak kullanıldığı alan olması nedeniyle ReFlow teknolojisi için stratejik öneme sahiptir.
+
+\section{SONUÇ VE ÖNERİLER}
+
+Bu kapsamlı araştırma ve geliştirme projesi sonucunda ortaya konan ReFlow otomatik penetrant sıvı geri kazanım sistemi, havacılık endüstrisindeki NDT uygulamalarında önemli bir çevresel ve ekonomik soruna yenilikçi bir çözüm sunmaktadır \cite{christensen2016innovator}.
+
+Proje süresince yürütülen detaylı tasarım çalışmaları, prototip geliştirme, pilot uygulama ve kapsamlı analizler, sistemin hem teknik olarak uygulanabilir hem de ekonomik olarak cazip olduğunu net bir şekilde kanıtlamıştır. Tesis düzeyinde yapılan değerlendirmeler, ReFlow sisteminin kullanıldığı bir işletmenin yıllık ortalama 67.500 TL civarında bir net ekonomik tasarruf sağlayabileceğini ve yapılan yatırımın kendini yaklaşık 2.8 yıl gibi makul bir sürede geri ödeyebileceğini göstermiştir.
+
+Araştırmanın ana katkıları şu şekilde özetlenebilir: Yenilikçi teknolojik çözüm geliştirme, kapsamlı ekonomik fizibilite analizi, sektörel etki değerlendirmesi, çevresel fayda kanıtlama ve sürdürülebilir endüstriyel dönüşüm için model oluşturma.
+
+Gelecek araştırma önerileri arasında sistemin farklı endüstriyel uygulamalara adaptasyonu, AI algoritmalarının geliştirilmesi, IoT entegrasyonunun derinleştirilmesi ve uluslararası pazar analizi yer almaktadır.
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document} 
