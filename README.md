@@ -3,8 +3,15 @@
 [![TÜBİTAK 2209-A](https://img.shields.io/badge/TÜBİTAK-2209--A-blue.svg)](https://tubitak.gov.tr)
 [![License](https://img.shields.io/badge/License-Academic-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg)](https://github.com)
+[![GitHub Pages](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](https://web3alkan.github.io/reflow)
 
 > **Havacılık Endüstrisinde Çevresel Sürdürülebilirlik ve Ekonomik Verimlilik İçin Akıllı NDT Atık Yönetim Sistemi**
+
+## 🌐 Canlı Demo
+
+**Website:** [https://web3alkan.github.io/reflow](https://web3alkan.github.io/reflow)
+
+Proje hakkında detaylı bilgi almak, interaktif sunumu görmek ve akademik raporları incelemek için yukarıdaki linki ziyaret edin.
 
 ## 📋 Proje Özeti
 
