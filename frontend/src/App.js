@@ -24,6 +24,7 @@ import Analytics from './pages/Analytics/Analytics';
 import Maintenance from './pages/Maintenance/Maintenance';
 import Settings from './pages/Settings/Settings';
 import UserManagement from './pages/Admin/UserManagement';
+import ResearchDashboard from './pages/Research/ResearchDashboard';
 
 // Theme configuration
 const theme = createTheme({
@@ -252,6 +253,15 @@ const AppContent = () => {
             element={
               <ProtectedRoute requiredRole="admin">
                 <UserManagement />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/research"
+            element={
+              <ProtectedRoute>
+                <ResearchDashboard />
               </ProtectedRoute>
             }
           />
